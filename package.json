@@ -1,0 +1,51 @@
+{
+  "name": "idkollen-client",
+  "version": "0.1.0",
+  "description": "TypeScript client for the IDkollen REST API",
+  "type": "module",
+  "main": "./dist/idkollen-client.cjs",
+  "module": "./dist/idkollen-client.js",
+  "types": "./dist/idkollen-client.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/idkollen-client.d.ts",
+        "default": "./dist/idkollen-client.js"
+      },
+      "require": {
+        "types": "./dist/idkollen-client.d.ts",
+        "default": "./dist/idkollen-client.cjs"
+      }
+    }
+  },
+  "license": "MIT",
+  "homepage": "https://idkollen.se",
+  "keywords": [
+    "bankid",
+    "eid",
+    "identity",
+    "authentication",
+    "nordic"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc --noEmit",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.4.1",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.6",
+    "prettier": "3.8.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.60.1",
+    "unplugin-dts-bundle-generator": "3.4.1",
+    "vite": "8.0.16"
+  }
+}

@@ -1,11 +1,27 @@
-# idkollen-client (TypeScript / JavaScript)
+<img align="left" height="100" style="margin-right: 10px;" src="../img/icon.png">
 
-TypeScript client for the [IDkollen](https://idkollen.se) REST API. Ships ESM and CJS bundles with full type declarations.
+# IDkollen JavaScript/TypeScript Client
+
+[![npm][npm-image]][npm-url]
+[![Downloads][downloads-image]][downloads-url]
+[![Documentation][docs-image]][docs-url]
+[![MIT license][license-image]][license-url]
+
+[npm-image]: https://img.shields.io/npm/v/@idkollen/client?style=flat-square 
+[npm-url]: https://www.npmjs.com/package/@idkollen/client
+[downloads-image]: https://img.shields.io/npm/d/@idkollen/client?style=flat-square
+[downloads-url]: https://www.npmjs.com/package/@idkollen/client?activeTab=versions
+[docs-image]: https://img.shields.io/badge/github-docs-orange?logo=github&style=flat-square
+[docs-url]: https://idkollen.github.io/idk-clients/js
+[license-image]: https://img.shields.io/badge/license-MIT-blue?style=flat-square
+[license-url]: https://opensource.org/license/mit
+
+API client for the [IDkollen](https://developers.idkollen.se) REST API. Ships ESM and CJS bundles with full type declarations.
 
 ## Installation
 
 ```sh
-npm install idkollen-client
+npm install @idkollen/client
 ```
 
 ## Usage
@@ -27,30 +43,31 @@ const result = await client
 console.log(result);
 ```
 
-## Error handling
+## Development
 
-All errors are thrown as `IdkollenError` instances with a `code` discriminant:
+#### Prerequisites
 
-| `code`          | Meaning                                              |
-|-----------------|------------------------------------------------------|
-| `"http"`        | Network failure (no response received)               |
-| `"api"`         | Non-2xx response from the server                     |
-| `"poll_timeout"`| `waitFor*` deadline exceeded without terminal state  |
-| `"json"`        | Unexpected response shape                            |
+* [Node 24+ & NPM 11+](https://nodejs.org/)
 
-## Polling options
+#### Build
 
-```typescript
-// Custom poll interval and timeout
-const opts = new PollOptions(
-  1_000,   // intervalMs — how often to poll (default 2 000)
-  60_000,  // timeoutMs  — give up after this long (default 300 000)
-);
-```
-
-## Build
+To build the project, simply issue the following command:
 
 ```sh
-npm run build   # produce dist/
-npm run check   # TypeScript type-check only
+$ npm run build
+```
+
+#### Test
+
+##### Linting
+
+```sh
+$ npm run check
+$ npm run lint
+```
+
+##### Unit Testing 
+
+```sh
+$ npm run test
 ```

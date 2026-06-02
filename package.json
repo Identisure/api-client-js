@@ -1,7 +1,7 @@
 {
-  "name": "idkollen-client",
+  "name": "@idkollen/client",
   "version": "0.1.0",
-  "description": "TypeScript client for the IDkollen REST API",
+  "description": "API client for the IDkollen REST API",
   "type": "module",
   "main": "./dist/idkollen-client.cjs",
   "module": "./dist/idkollen-client.js",
@@ -19,13 +19,19 @@
     }
   },
   "license": "MIT",
-  "homepage": "https://idkollen.se",
+  "homepage": "https://developers.idkollen.se",
+  "bugs": {
+    "url": "https://github.com/idkollen/idk-clients/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idkollen/idk-clients.git"
+  },
   "keywords": [
     "bankid",
     "eid",
     "identity",
-    "authentication",
-    "nordic"
+    "authentication"
   ],
   "files": [
     "dist"

@@ -39,6 +39,7 @@
   "scripts": {
     "build": "vite build",
     "check": "tsc --noEmit",
+    "gen:doc": "typedoc src/index.ts",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "test": "echo \"No tests specified\" && exit 0"
@@ -49,6 +50,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.6",
     "prettier": "3.8.3",
+    "typedoc": "0.28.19",
     "typescript": "6.0.3",
     "typescript-eslint": "8.60.1",
     "unplugin-dts-bundle-generator": "3.4.1",

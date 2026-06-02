@@ -9,7 +9,7 @@
 
 [npm-image]: https://img.shields.io/npm/v/@idkollen/client?style=flat-square 
 [npm-url]: https://www.npmjs.com/package/@idkollen/client
-[downloads-image]: https://img.shields.io/npm/d/@idkollen/client?style=flat-square
+[downloads-image]: https://img.shields.io/npm/d18m/@idkollen/client?style=flat-square
 [downloads-url]: https://www.npmjs.com/package/@idkollen/client?activeTab=versions
 [docs-image]: https://img.shields.io/badge/github-docs-orange?logo=github&style=flat-square
 [docs-url]: https://idkollen.github.io/idk-clients/js
@@ -27,8 +27,7 @@ npm install @idkollen/client
 ## Usage
 
 ```typescript
-import { IdkollenClientBuilder } from "idkollen-client";
-import { BankIdSeAuthRequest, PollOptions } from "idkollen-client";
+import { IdkollenClientBuilder, BankIdSeAuthRequest, PollOptions } from "@idkollen/client";
 
 const client = new IdkollenClientBuilder("client_id", "client_secret")
   .environment("staging")

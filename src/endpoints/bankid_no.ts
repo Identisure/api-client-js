@@ -5,6 +5,7 @@ import type {
   BankIdNoSignRequest,
   BankIdNoStatus,
 } from "@/models/bankid_no";
+import type { AgeVerificationRequest, AgeVerificationStatus } from "@/models/age_verification";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
@@ -47,6 +48,21 @@ export class BankIdNoEndpoint {
     return this.client._delete(`/v3/bankid-no/sign/${id}`);
   }
 
+  /** Start a BankID NO age verification session. */
+  public async ageVerification(req: AgeVerificationRequest): Promise<AgeVerificationStatus> {
+    return this.client._post("/v3/bankid-no/age-verification", req);
+  }
+
+  /** Poll the current status of a BankID NO age verification session. */
+  public async ageVerificationStatus(id: string): Promise<AgeVerificationStatus> {
+    return this.client._get(`/v3/bankid-no/age-verification/${id}`);
+  }
+
+  /** Cancel a BankID NO age verification session. */
+  public async cancelAgeVerification(id: string): Promise<void> {
+    return this.client._delete(`/v3/bankid-no/age-verification/${id}`);
+  }
+
   /**
    * Poll until the authentication session reaches a terminal state or the timeout elapses.
    * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
@@ -84,6 +100,31 @@ export class BankIdNoEndpoint {
 
     while (true) {
       const status = await this.signStatus(id);
+
+      if (status.status !== "PENDING") {
+        return status;
+      }
+
+      if (Date.now() >= deadline) {
+        throw new IdkollenError("poll_timeout", 0, "Poll timed out");
+      }
+
+      await sleep(opts.intervalMs);
+    }
+  }
+
+  /**
+   * Poll until the age verification session reaches a terminal state or the timeout elapses.
+   * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
+   */
+  public async waitForAgeVerification(
+    id: string,
+    opts: PollOptions = new PollOptions(),
+  ): Promise<AgeVerificationStatus> {
+    const deadline = Date.now() + opts.timeoutMs;
+
+    while (true) {
+      const status = await this.ageVerificationStatus(id);
 
       if (status.status !== "PENDING") {
         return status;

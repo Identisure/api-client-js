@@ -20,7 +20,7 @@ export class DocumentEndpoint {
     const blob = new Blob([new Uint8Array(file)], { type: mimeType ?? "application/pdf" });
     form.append("file", blob, filename);
 
-    return this.client._postMultipart("/document", form);
+    return this.client._postMultipart("/v3/document", form);
   }
 
   /**
@@ -28,11 +28,6 @@ export class DocumentEndpoint {
    * @returns Raw PDF bytes.
    */
   public async download(id: string): Promise<Uint8Array> {
-    return this.client._getBytes(`/document/${id}`);
-  }
-
-  /** Delete a document by ID. */
-  public async delete(id: string): Promise<void> {
-    return this.client._delete(`/document/${id}`);
+    return this.client._getBytes(`/v3/document/${id}`);
   }
 }

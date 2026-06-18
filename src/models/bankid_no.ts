@@ -36,10 +36,6 @@ export interface BankIdNoSignRequest {
   text?: string;
   /** Document IDs to sign (from `/v3/document`). Mutually exclusive with `text`. */
   documents?: string[];
-  requestSsn?: boolean;
-  requestPhone?: boolean;
-  requestEmail?: boolean;
-  requestAddress?: boolean;
   /** Reference ID returned verbatim in the result and callback. */
   refId?: string;
 }

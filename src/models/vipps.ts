@@ -53,7 +53,7 @@ export interface VippsCompleted {
   id: string;
   refId?: string;
   /** Present when `requestSsn` was `true`. */
-  ssn: string;
+  ssn?: string;
   name: string;
   givenName: string;
   surname: string;

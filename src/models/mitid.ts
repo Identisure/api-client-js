@@ -58,7 +58,7 @@ export interface MitIdCompleted {
   id: string;
   refId?: string;
   /** Danish CPR number. */
-  ssn: string;
+  ssn?: string;
   name: string;
   givenName: string;
   surname: string;

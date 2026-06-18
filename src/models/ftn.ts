@@ -33,7 +33,7 @@ export interface FtnCompleted {
   id: string;
   refId?: string;
   /** Finnish personal identity code (henkilötunnus). May be absent depending on the provider. */
-  ssn: string;
+  ssn?: string;
   name: string;
   givenName: string;
   surname: string;

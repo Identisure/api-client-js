@@ -65,7 +65,7 @@ export interface BankIdNoCompleted {
   id: string;
   refId?: string;
   /** Norwegian personal number. Present when `requestSsn` was `true`. */
-  ssn: string;
+  ssn?: string;
   name: string;
   givenName: string;
   surname: string;

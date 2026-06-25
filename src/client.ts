@@ -58,7 +58,7 @@ export class IdkollenClientBuilder {
 
   /** Override the API base URL, bypassing the environment selection entirely. */
   baseUrl(url: string): this {
-    this._baseUrl = url;
+    this._baseUrl = url.replace(/\/+$/, "");
     return this;
   }
 

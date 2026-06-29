@@ -43,7 +43,7 @@ export class FtnEndpoint {
    * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
    */
   public async waitForAuth(id: string, opts: PollOptions = new PollOptions()): Promise<FtnStatus> {
-    const deadline = Date.now() + opts.timeoutMs;
+    const deadline = performance.now() + opts.timeoutMs;
 
     while (true) {
       const status = await this.authStatus(id);
@@ -52,7 +52,7 @@ export class FtnEndpoint {
         return status;
       }
 
-      if (Date.now() >= deadline) {
+      if (performance.now() >= deadline) {
         throw new IdkollenError("poll_timeout", 0, "Poll timed out");
       }
 
@@ -68,7 +68,7 @@ export class FtnEndpoint {
     id: string,
     opts: PollOptions = new PollOptions(),
   ): Promise<AgeVerificationStatus> {
-    const deadline = Date.now() + opts.timeoutMs;
+    const deadline = performance.now() + opts.timeoutMs;
 
     while (true) {
       const status = await this.ageVerificationStatus(id);
@@ -77,7 +77,7 @@ export class FtnEndpoint {
         return status;
       }
 
-      if (Date.now() >= deadline) {
+      if (performance.now() >= deadline) {
         throw new IdkollenError("poll_timeout", 0, "Poll timed out");
       }
 

@@ -35,7 +35,7 @@ export class VippsEndpoint {
     id: string,
     opts: PollOptions = new PollOptions(),
   ): Promise<VippsStatus> {
-    const deadline = Date.now() + opts.timeoutMs;
+    const deadline = performance.now() + opts.timeoutMs;
 
     while (true) {
       const status = await this.authStatus(id);
@@ -44,7 +44,7 @@ export class VippsEndpoint {
         return status;
       }
 
-      if (Date.now() >= deadline) {
+      if (performance.now() >= deadline) {
         throw new IdkollenError("poll_timeout", 0, "Poll timed out");
       }
 

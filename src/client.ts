@@ -46,11 +46,15 @@ export class IdkollenClientBuilder {
   private _environment: Environment = "production";
   private _baseUrl?: string;
   private _userAgent: string = `idkollen-client-js/${version}`;
+  // ES private field, so console.log and util.inspect do not print the secret.
+  readonly #clientSecret: string;
 
   constructor(
     private readonly clientId: string,
-    private readonly clientSecret: string,
-  ) {}
+    clientSecret: string,
+  ) {
+    this.#clientSecret = clientSecret;
+  }
 
   /** Select a pre-configured environment. Overridden by {@link baseUrl} if both are set. */
   environment(env: Environment): this {
@@ -74,18 +78,23 @@ export class IdkollenClientBuilder {
   build(): IdkollenClient {
     const baseUrl = this._baseUrl ?? BASE_URLS[this._environment];
 
-    return new IdkollenClient(baseUrl, this.clientId, this.clientSecret, this._userAgent);
+    return new IdkollenClient(baseUrl, this.clientId, this.#clientSecret, this._userAgent);
   }
 }
 
 /** Authenticated HTTP client for the Idkollen REST API. Obtain one via {@link IdkollenClientBuilder}. */
 export class IdkollenClient {
+  // ES private field, so console.log and util.inspect do not print the secret.
+  readonly #clientSecret: string;
+
   constructor(
     private readonly baseUrl: string,
     private readonly clientId: string,
-    private readonly clientSecret: string,
+    clientSecret: string,
     private readonly userAgent: string,
-  ) {}
+  ) {
+    this.#clientSecret = clientSecret;
+  }
 
   /** Return an endpoint handle for BankID SE operations. */
   bankidSe(): BankIdSeEndpoint {
@@ -123,7 +132,7 @@ export class IdkollenClient {
   }
 
   private authHeader(): string {
-    return `Basic ${btoa(`${this.clientId}:${this.clientSecret}`)}`;
+    return `Basic ${btoa(`${this.clientId}:${this.#clientSecret}`)}`;
   }
 
   private commonHeaders(): Record<string, string> {

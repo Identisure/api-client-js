@@ -39,6 +39,8 @@ const BASE_URLS: Record<Environment, string> = {
   staging: "https://stgapi.idkollen.se",
 };
 
+const REQUEST_TIMEOUT_MS = 30_000;
+
 /** Builder for constructing an {@link IdkollenClient}. */
 export class IdkollenClientBuilder {
   private _environment: Environment = "production";
@@ -151,6 +153,7 @@ export class IdkollenClient {
       resp = await fetch(`${this.baseUrl}${path}`, {
         method: "GET",
         headers: this.commonHeaders(),
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
     } catch (err) {
       throw new IdkollenError("http", 0, (err as Error).message);
@@ -169,6 +172,7 @@ export class IdkollenClient {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
     } catch (err) {
       throw new IdkollenError("http", 0, (err as Error).message);
@@ -183,6 +187,7 @@ export class IdkollenClient {
       resp = await fetch(`${this.baseUrl}${path}`, {
         method: "DELETE",
         headers: this.commonHeaders(),
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
     } catch (err) {
       throw new IdkollenError("http", 0, (err as Error).message);
@@ -201,6 +206,7 @@ export class IdkollenClient {
       resp = await fetch(`${this.baseUrl}${path}`, {
         method: "POST",
         headers: this.commonHeaders(),
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
         body: form,
       });
     } catch (err) {
@@ -216,6 +222,7 @@ export class IdkollenClient {
       resp = await fetch(`${this.baseUrl}${path}`, {
         method: "GET",
         headers: this.commonHeaders(),
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       });
     } catch (err) {
       throw new IdkollenError("http", 0, (err as Error).message);

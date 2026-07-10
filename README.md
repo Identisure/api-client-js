@@ -27,17 +27,15 @@ npm install @idkollen/client
 ## Usage
 
 ```typescript
-import { IdkollenClientBuilder, BankIdSeAuthRequest, PollOptions } from "@idkollen/client";
+import { IdkollenClientBuilder } from "@idkollen/client";
 
 const client = new IdkollenClientBuilder("client_id", "client_secret")
   .environment("staging")
   .build();
 
-const session = await client.bankidSe().auth(new BankIdSeAuthRequest());
+const session = await client.bankidSe().auth({});
 
-const result = await client
-  .bankidSe()
-  .waitForAuth(session.id, new PollOptions());
+const result = await client.bankidSe().waitForAuth(session.id);
 
 console.log(result);
 ```

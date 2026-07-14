@@ -13,7 +13,7 @@
         "default": "./dist/idkollen-client.js"
       },
       "require": {
-        "types": "./dist/idkollen-client.d.ts",
+        "types": "./dist/idkollen-client.d.cts",
         "default": "./dist/idkollen-client.cjs"
       }
     }

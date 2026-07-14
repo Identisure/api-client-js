@@ -17,5 +17,9 @@ export default defineConfig({
     dtsBundleGenerator({
       fileName: "idkollen-client.d.ts",
     }),
+    // CJS consumers need .d.cts types, or TypeScript treats them as ESM declarations.
+    dtsBundleGenerator({
+      fileName: "idkollen-client.d.cts",
+    }),
   ],
 });

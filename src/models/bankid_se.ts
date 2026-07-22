@@ -125,6 +125,14 @@ export interface BankIdSeCompleted {
   surname: string;
   /** Date the BankID certificate became valid (YYYY-MM-DD). */
   certStartDate?: string;
+  /** Base64-encoded OCSP response proving the certificate was valid at the time of the order. */
+  ocspResponse: string;
+  /** BankID's risk indication (`low`, `moderate` or `high`). Present only when `ipAddress` was provided and BankID could calculate it. */
+  risk?: string;
+  /** Information about the user's device, as seen by BankID. */
+  device?: BankIdSeDevice;
+  /** Additional verifications that were part of the order. Present only when BankID performed any. */
+  stepUp?: BankIdSeStepUp;
   /** Present only when `requestAddress` was `true`. */
   address?: string;
   /** Company signatory result text. Present only when `orgNumber` was provided. */
@@ -133,6 +141,22 @@ export interface BankIdSeCompleted {
   authenticatedAt?: string;
   /** When the user signed (ISO-8601 instant). Present for signing sessions. */
   signedAt?: string;
+}
+
+/** Information about the user's device, as seen by BankID. */
+export interface BankIdSeDevice {
+  /** IP address of the user agent as the BankID server sees it. */
+  ipAddress?: string;
+  /** Unique hardware identifier for the user's device. */
+  uhi?: string;
+}
+
+/** Additional verifications that were part of a BankID SE order. */
+export interface BankIdSeStepUp {
+  /** Whether an MRTD (machine readable travel document) check was performed. */
+  mrtd?: boolean;
+  /** Whether the order was stepped up with facial recognition. */
+  face?: boolean;
 }
 
 /** Returned when the BankID SE session has failed. */

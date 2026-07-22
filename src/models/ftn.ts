@@ -43,6 +43,9 @@ export interface FtnCompleted {
   birthDate?: string;
   pid?: string;
   bankId?: string;
+  bankName?: string;
+  /** When the user authenticated (ISO-8601 instant). */
+  authenticatedAt?: string;
 }
 
 /** Returned when the FTN session has failed. */

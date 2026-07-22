@@ -129,6 +129,10 @@ export interface BankIdSeCompleted {
   address?: string;
   /** Company signatory result text. Present only when `orgNumber` was provided. */
   companySignatoryText?: string;
+  /** When the user authenticated (ISO-8601 instant). */
+  authenticatedAt?: string;
+  /** When the user signed (ISO-8601 instant). Present for signing sessions. */
+  signedAt?: string;
 }
 
 /** Returned when the BankID SE session has failed. */

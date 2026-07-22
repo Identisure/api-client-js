@@ -79,6 +79,10 @@ export interface BankIdNoCompleted {
   signResult?: BankIdNoSignResult;
   /** Present when documents were signed. */
   signedDocuments?: BankIdNoSignedDocument[];
+  /** When the user authenticated (ISO-8601 instant). */
+  authenticatedAt?: string;
+  /** When the user signed (ISO-8601 instant). Present for signing sessions. */
+  signedAt?: string;
 }
 
 /** Returned when the BankID NO session has failed. */

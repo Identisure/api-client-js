@@ -109,6 +109,10 @@ export interface FrejaCompleted {
   address?: string;
   /** Present only when `orgNumber` was provided. */
   companySignatoryText?: string;
+  /** When the user authenticated (ISO-8601 instant). */
+  authenticatedAt?: string;
+  /** When the user signed (ISO-8601 instant). Present for signing sessions. */
+  signedAt?: string;
 }
 
 /** Returned when the Freja eID session has failed. */

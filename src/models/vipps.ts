@@ -63,6 +63,8 @@ export interface VippsCompleted {
   birthDate?: string;
   pid?: string;
   bankId?: string;
+  /** When the user authenticated (ISO-8601 instant). */
+  authenticatedAt?: string;
 }
 
 /** Returned when the Vipps session has failed. */

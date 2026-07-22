@@ -70,6 +70,10 @@ export interface MitIdCompleted {
   bankId?: string;
   /** Present when the session was a signing session. */
   signResult?: MitIdSignResult;
+  /** When the user authenticated (ISO-8601 instant). */
+  authenticatedAt?: string;
+  /** When the user signed (ISO-8601 instant). Present for signing sessions. */
+  signedAt?: string;
 }
 
 /** Returned when the MitID session has failed. */

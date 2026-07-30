@@ -5,9 +5,13 @@ import type {
   MitIdSignRequest,
   MitIdStatus,
 } from "@/models/mitid";
-import type { AgeVerificationRequest, AgeVerificationStatus } from "@/models/age_verification";
+import type {
+  AgeVerificationRequest,
+  AgeVerificationStatus,
+} from "@/models/age_verification";
 
-const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> =>
+  new Promise((r) => setTimeout(r, ms));
 
 /** MitID operations. */
 export class MitIdEndpoint {
@@ -19,7 +23,9 @@ export class MitIdEndpoint {
   }
 
   /** Start a MitID backchannel authentication session. */
-  public async backchannelAuth(req: MitIdBackchannelAuthRequest): Promise<MitIdStatus> {
+  public async backchannelAuth(
+    req: MitIdBackchannelAuthRequest,
+  ): Promise<MitIdStatus> {
     return this.client._post("/v3/mitid/backchannel/auth", req);
   }
 
@@ -49,12 +55,16 @@ export class MitIdEndpoint {
   }
 
   /** Start a MitID age verification session. */
-  public async ageVerification(req: AgeVerificationRequest): Promise<AgeVerificationStatus> {
+  public async ageVerification(
+    req: AgeVerificationRequest,
+  ): Promise<AgeVerificationStatus> {
     return this.client._post("/v3/mitid/age-verification", req);
   }
 
   /** Poll the current status of a MitID age verification session. */
-  public async ageVerificationStatus(id: string): Promise<AgeVerificationStatus> {
+  public async ageVerificationStatus(
+    id: string,
+  ): Promise<AgeVerificationStatus> {
     return this.client._get(`/v3/mitid/age-verification/${id}`);
   }
 

@@ -1,5 +1,10 @@
 /** Language preference for UI messages shown to the user. */
-export type Language = "ENGLISH" | "SWEDISH" | "NORWEGIAN" | "DANISH" | "FINNISH";
+export type Language =
+  | "ENGLISH"
+  | "SWEDISH"
+  | "NORWEGIAN"
+  | "DANISH"
+  | "FINNISH";
 
 /**
  * Standardised error code present in all `FAILED` status responses.

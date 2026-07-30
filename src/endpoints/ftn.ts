@@ -1,8 +1,12 @@
 import { IdkollenClient, IdkollenError, PollOptions } from "@/client";
 import type { FtnAuthRequest, FtnStatus } from "@/models/ftn";
-import type { AgeVerificationRequest, AgeVerificationStatus } from "@/models/age_verification";
+import type {
+  AgeVerificationRequest,
+  AgeVerificationStatus,
+} from "@/models/age_verification";
 
-const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> =>
+  new Promise((r) => setTimeout(r, ms));
 
 /** Finnish Trust Network (FTN) operations. */
 export class FtnEndpoint {
@@ -14,7 +18,9 @@ export class FtnEndpoint {
   }
 
   /** Start a FTN age verification session. */
-  public async ageVerification(req: AgeVerificationRequest): Promise<AgeVerificationStatus> {
+  public async ageVerification(
+    req: AgeVerificationRequest,
+  ): Promise<AgeVerificationStatus> {
     return this.client._post("/v3/ftn/age-verification", req);
   }
 
@@ -24,7 +30,9 @@ export class FtnEndpoint {
   }
 
   /** Poll the current status of a FTN age verification session. */
-  public async ageVerificationStatus(id: string): Promise<AgeVerificationStatus> {
+  public async ageVerificationStatus(
+    id: string,
+  ): Promise<AgeVerificationStatus> {
     return this.client._get(`/v3/ftn/age-verification/${id}`);
   }
 
@@ -42,7 +50,10 @@ export class FtnEndpoint {
    * Poll until the authentication session reaches a terminal state or the timeout elapses.
    * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
    */
-  public async waitForAuth(id: string, opts: PollOptions = new PollOptions()): Promise<FtnStatus> {
+  public async waitForAuth(
+    id: string,
+    opts: PollOptions = new PollOptions(),
+  ): Promise<FtnStatus> {
     const deadline = performance.now() + opts.timeoutMs;
 
     while (true) {

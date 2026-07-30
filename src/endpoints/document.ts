@@ -17,7 +17,9 @@ export class DocumentEndpoint {
     mimeType?: string,
   ): Promise<DocumentUploadResponse> {
     const form = new FormData();
-    const blob = new Blob([new Uint8Array(file)], { type: mimeType ?? "application/pdf" });
+    const blob = new Blob([new Uint8Array(file)], {
+      type: mimeType ?? "application/pdf",
+    });
     form.append("file", blob, filename);
 
     return this.client._postMultipart("/v3/document", form);

@@ -6,9 +6,13 @@ import type {
   FrejaSignRequest,
   FrejaStatus,
 } from "@/models/freja";
-import type { AgeVerificationRequest, AgeVerificationStatus } from "@/models/age_verification";
+import type {
+  AgeVerificationRequest,
+  AgeVerificationStatus,
+} from "@/models/age_verification";
 
-const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> =>
+  new Promise((r) => setTimeout(r, ms));
 
 /** Freja eID operations. */
 export class FrejaEndpoint {
@@ -20,7 +24,9 @@ export class FrejaEndpoint {
   }
 
   /** Start a Freja eID backchannel authentication session. */
-  public async backchannelAuth(req: FrejaBackchannelAuthRequest): Promise<FrejaStatus> {
+  public async backchannelAuth(
+    req: FrejaBackchannelAuthRequest,
+  ): Promise<FrejaStatus> {
     return this.client._post("/v3/freja/backchannel/auth", req);
   }
 
@@ -30,7 +36,9 @@ export class FrejaEndpoint {
   }
 
   /** Start a Freja eID backchannel signing session. */
-  public async backchannelSign(req: FrejaBackchannelSignRequest): Promise<FrejaStatus> {
+  public async backchannelSign(
+    req: FrejaBackchannelSignRequest,
+  ): Promise<FrejaStatus> {
     return this.client._post("/v3/freja/backchannel/sign", req);
   }
 
@@ -55,12 +63,16 @@ export class FrejaEndpoint {
   }
 
   /** Start a Freja eID age verification session. */
-  public async ageVerification(req: AgeVerificationRequest): Promise<AgeVerificationStatus> {
+  public async ageVerification(
+    req: AgeVerificationRequest,
+  ): Promise<AgeVerificationStatus> {
     return this.client._post("/v3/freja/age-verification", req);
   }
 
   /** Poll the current status of a Freja eID age verification session. */
-  public async ageVerificationStatus(id: string): Promise<AgeVerificationStatus> {
+  public async ageVerificationStatus(
+    id: string,
+  ): Promise<AgeVerificationStatus> {
     return this.client._get(`/v3/freja/age-verification/${id}`);
   }
 

@@ -78,7 +78,12 @@ export class IdkollenClientBuilder {
   build(): IdkollenClient {
     const baseUrl = this._baseUrl ?? BASE_URLS[this._environment];
 
-    return new IdkollenClient(baseUrl, this.clientId, this.#clientSecret, this._userAgent);
+    return new IdkollenClient(
+      baseUrl,
+      this.clientId,
+      this.#clientSecret,
+      this._userAgent,
+    );
   }
 }
 

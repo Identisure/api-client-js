@@ -5,9 +5,13 @@ import type {
   BankIdNoSignRequest,
   BankIdNoStatus,
 } from "@/models/bankid_no";
-import type { AgeVerificationRequest, AgeVerificationStatus } from "@/models/age_verification";
+import type {
+  AgeVerificationRequest,
+  AgeVerificationStatus,
+} from "@/models/age_verification";
 
-const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> =>
+  new Promise((r) => setTimeout(r, ms));
 
 /** BankID NO operations. */
 export class BankIdNoEndpoint {
@@ -19,7 +23,9 @@ export class BankIdNoEndpoint {
   }
 
   /** Start a BankID NO backchannel authentication session. */
-  public async backchannelAuth(req: BankIdNoBackchannelAuthRequest): Promise<BankIdNoStatus> {
+  public async backchannelAuth(
+    req: BankIdNoBackchannelAuthRequest,
+  ): Promise<BankIdNoStatus> {
     return this.client._post("/v3/bankid-no/backchannel/auth", req);
   }
 
@@ -49,12 +55,16 @@ export class BankIdNoEndpoint {
   }
 
   /** Start a BankID NO age verification session. */
-  public async ageVerification(req: AgeVerificationRequest): Promise<AgeVerificationStatus> {
+  public async ageVerification(
+    req: AgeVerificationRequest,
+  ): Promise<AgeVerificationStatus> {
     return this.client._post("/v3/bankid-no/age-verification", req);
   }
 
   /** Poll the current status of a BankID NO age verification session. */
-  public async ageVerificationStatus(id: string): Promise<AgeVerificationStatus> {
+  public async ageVerificationStatus(
+    id: string,
+  ): Promise<AgeVerificationStatus> {
     return this.client._get(`/v3/bankid-no/age-verification/${id}`);
   }
 

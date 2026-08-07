@@ -22,26 +22,26 @@ export class BankIdSeEndpoint {
 
   /** Start a BankID SE authentication session. */
   public async auth(req: BankIdSeAuthRequest): Promise<BankIdSeStatus> {
-    return this.client._post("/v3/bankid-se/auth", req);
+    return this.client._postStatus("/v3/bankid-se/auth", req);
   }
 
   /** Start a BankID SE phone authentication session. */
   public async phoneAuth(
     req: BankIdSePhoneAuthRequest,
   ): Promise<BankIdSeStatus> {
-    return this.client._post("/v3/bankid-se/phone/auth", req);
+    return this.client._postStatus("/v3/bankid-se/phone/auth", req);
   }
 
   /** Start a BankID SE signing session. */
   public async sign(req: BankIdSeSignRequest): Promise<BankIdSeStatus> {
-    return this.client._post("/v3/bankid-se/sign", req);
+    return this.client._postStatus("/v3/bankid-se/sign", req);
   }
 
   /** Start a BankID SE phone signing session. */
   public async phoneSign(
     req: BankIdSePhoneSignRequest,
   ): Promise<BankIdSeStatus> {
-    return this.client._post("/v3/bankid-se/phone/sign", req);
+    return this.client._postStatus("/v3/bankid-se/phone/sign", req);
   }
 
   /** Verify a scanned BankID SE QR code. */
@@ -55,24 +55,24 @@ export class BankIdSeEndpoint {
   public async ageVerification(
     req: AgeVerificationRequest,
   ): Promise<AgeVerificationStatus> {
-    return this.client._post("/v3/bankid-se/age-verification", req);
+    return this.client._postStatus("/v3/bankid-se/age-verification", req);
   }
 
   /** Poll the current status of a BankID SE authentication session. */
   public async authStatus(id: string): Promise<BankIdSeStatus> {
-    return this.client._get(`/v3/bankid-se/auth/${id}`);
+    return this.client._getStatus(`/v3/bankid-se/auth/${id}`);
   }
 
   /** Poll the current status of a BankID SE signing session. */
   public async signStatus(id: string): Promise<BankIdSeStatus> {
-    return this.client._get(`/v3/bankid-se/sign/${id}`);
+    return this.client._getStatus(`/v3/bankid-se/sign/${id}`);
   }
 
   /** Poll the current status of a BankID SE age verification session. */
   public async ageVerificationStatus(
     id: string,
   ): Promise<AgeVerificationStatus> {
-    return this.client._get(`/v3/bankid-se/age-verification/${id}`);
+    return this.client._getStatus(`/v3/bankid-se/age-verification/${id}`);
   }
 
   /** Cancel a BankID SE authentication session. */

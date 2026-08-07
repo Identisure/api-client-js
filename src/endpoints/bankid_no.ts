@@ -19,29 +19,29 @@ export class BankIdNoEndpoint {
 
   /** Start a BankID NO authentication session. */
   public async auth(req: BankIdNoAuthRequest): Promise<BankIdNoStatus> {
-    return this.client._post("/v3/bankid-no/auth", req);
+    return this.client._postStatus("/v3/bankid-no/auth", req);
   }
 
   /** Start a BankID NO backchannel authentication session. */
   public async backchannelAuth(
     req: BankIdNoBackchannelAuthRequest,
   ): Promise<BankIdNoStatus> {
-    return this.client._post("/v3/bankid-no/backchannel/auth", req);
+    return this.client._postStatus("/v3/bankid-no/backchannel/auth", req);
   }
 
   /** Start a BankID NO signing session. */
   public async sign(req: BankIdNoSignRequest): Promise<BankIdNoStatus> {
-    return this.client._post("/v3/bankid-no/sign", req);
+    return this.client._postStatus("/v3/bankid-no/sign", req);
   }
 
   /** Poll the current status of a BankID NO authentication session. */
   public async authStatus(id: string): Promise<BankIdNoStatus> {
-    return this.client._get(`/v3/bankid-no/auth/${id}`);
+    return this.client._getStatus(`/v3/bankid-no/auth/${id}`);
   }
 
   /** Poll the current status of a BankID NO signing session. */
   public async signStatus(id: string): Promise<BankIdNoStatus> {
-    return this.client._get(`/v3/bankid-no/sign/${id}`);
+    return this.client._getStatus(`/v3/bankid-no/sign/${id}`);
   }
 
   /** Cancel a BankID NO authentication session. */
@@ -58,14 +58,14 @@ export class BankIdNoEndpoint {
   public async ageVerification(
     req: AgeVerificationRequest,
   ): Promise<AgeVerificationStatus> {
-    return this.client._post("/v3/bankid-no/age-verification", req);
+    return this.client._postStatus("/v3/bankid-no/age-verification", req);
   }
 
   /** Poll the current status of a BankID NO age verification session. */
   public async ageVerificationStatus(
     id: string,
   ): Promise<AgeVerificationStatus> {
-    return this.client._get(`/v3/bankid-no/age-verification/${id}`);
+    return this.client._getStatus(`/v3/bankid-no/age-verification/${id}`);
   }
 
   /** Cancel a BankID NO age verification session. */

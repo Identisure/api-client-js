@@ -1,4 +1,4 @@
-import type { ApiErrorCode } from "@/models/common";
+import type { ApiErrorCode, UnknownStatus } from "@/models/common";
 
 /** Request body for starting a Finnish Trust Network (FTN) authentication session. */
 export interface FtnAuthRequest {
@@ -18,7 +18,8 @@ export interface FtnAuthRequest {
 export type FtnStatus =
   | ({ status: "PENDING" } & FtnPending)
   | ({ status: "COMPLETED" } & FtnCompleted)
-  | ({ status: "FAILED" } & FtnFailed);
+  | ({ status: "FAILED" } & FtnFailed)
+  | UnknownStatus;
 
 /** Returned while the user has not yet acted. */
 export interface FtnPending {

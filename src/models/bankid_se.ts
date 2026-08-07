@@ -1,4 +1,8 @@
-import type { ApiErrorCode, CallInitiator } from "@/models/common";
+import type {
+  ApiErrorCode,
+  CallInitiator,
+  UnknownStatus,
+} from "@/models/common";
 
 /** Request body for starting a BankID SE authentication session. */
 export interface BankIdSeAuthRequest {
@@ -94,7 +98,8 @@ export interface BankIdSeVerifyRequest {
 export type BankIdSeStatus =
   | ({ status: "PENDING" } & BankIdSePending)
   | ({ status: "COMPLETED" } & BankIdSeCompleted)
-  | ({ status: "FAILED" } & BankIdSeFailed);
+  | ({ status: "FAILED" } & BankIdSeFailed)
+  | UnknownStatus;
 
 /** Returned while the user has not yet acted in the BankID app. */
 export interface BankIdSePending {

@@ -14,26 +14,26 @@ export class FtnEndpoint {
 
   /** Start a FTN authentication session. */
   public async auth(req: FtnAuthRequest): Promise<FtnStatus> {
-    return this.client._post("/v3/ftn/auth", req);
+    return this.client._postStatus("/v3/ftn/auth", req);
   }
 
   /** Start a FTN age verification session. */
   public async ageVerification(
     req: AgeVerificationRequest,
   ): Promise<AgeVerificationStatus> {
-    return this.client._post("/v3/ftn/age-verification", req);
+    return this.client._postStatus("/v3/ftn/age-verification", req);
   }
 
   /** Poll the current status of a FTN authentication session. */
   public async authStatus(id: string): Promise<FtnStatus> {
-    return this.client._get(`/v3/ftn/auth/${id}`);
+    return this.client._getStatus(`/v3/ftn/auth/${id}`);
   }
 
   /** Poll the current status of a FTN age verification session. */
   public async ageVerificationStatus(
     id: string,
   ): Promise<AgeVerificationStatus> {
-    return this.client._get(`/v3/ftn/age-verification/${id}`);
+    return this.client._getStatus(`/v3/ftn/age-verification/${id}`);
   }
 
   /** Cancel a FTN authentication session. */

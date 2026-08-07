@@ -20,36 +20,36 @@ export class FrejaEndpoint {
 
   /** Start a Freja eID authentication session. */
   public async auth(req: FrejaAuthRequest): Promise<FrejaStatus> {
-    return this.client._post("/v3/freja/auth", req);
+    return this.client._postStatus("/v3/freja/auth", req);
   }
 
   /** Start a Freja eID backchannel authentication session. */
   public async backchannelAuth(
     req: FrejaBackchannelAuthRequest,
   ): Promise<FrejaStatus> {
-    return this.client._post("/v3/freja/backchannel/auth", req);
+    return this.client._postStatus("/v3/freja/backchannel/auth", req);
   }
 
   /** Start a Freja eID signing session. */
   public async sign(req: FrejaSignRequest): Promise<FrejaStatus> {
-    return this.client._post("/v3/freja/sign", req);
+    return this.client._postStatus("/v3/freja/sign", req);
   }
 
   /** Start a Freja eID backchannel signing session. */
   public async backchannelSign(
     req: FrejaBackchannelSignRequest,
   ): Promise<FrejaStatus> {
-    return this.client._post("/v3/freja/backchannel/sign", req);
+    return this.client._postStatus("/v3/freja/backchannel/sign", req);
   }
 
   /** Poll the current status of a Freja eID authentication session. */
   public async authStatus(id: string): Promise<FrejaStatus> {
-    return this.client._get(`/v3/freja/auth/${id}`);
+    return this.client._getStatus(`/v3/freja/auth/${id}`);
   }
 
   /** Poll the current status of a Freja eID signing session. */
   public async signStatus(id: string): Promise<FrejaStatus> {
-    return this.client._get(`/v3/freja/sign/${id}`);
+    return this.client._getStatus(`/v3/freja/sign/${id}`);
   }
 
   /** Cancel a Freja eID authentication session. */
@@ -66,14 +66,14 @@ export class FrejaEndpoint {
   public async ageVerification(
     req: AgeVerificationRequest,
   ): Promise<AgeVerificationStatus> {
-    return this.client._post("/v3/freja/age-verification", req);
+    return this.client._postStatus("/v3/freja/age-verification", req);
   }
 
   /** Poll the current status of a Freja eID age verification session. */
   public async ageVerificationStatus(
     id: string,
   ): Promise<AgeVerificationStatus> {
-    return this.client._get(`/v3/freja/age-verification/${id}`);
+    return this.client._getStatus(`/v3/freja/age-verification/${id}`);
   }
 
   /** Cancel a Freja eID age verification session. */

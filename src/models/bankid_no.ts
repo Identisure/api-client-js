@@ -1,4 +1,4 @@
-import type { ApiErrorCode } from "@/models/common";
+import type { ApiErrorCode, UnknownStatus } from "@/models/common";
 
 /** Request body for starting a BankID NO authentication session. */
 export interface BankIdNoAuthRequest {
@@ -44,7 +44,8 @@ export interface BankIdNoSignRequest {
 export type BankIdNoStatus =
   | ({ status: "PENDING" } & BankIdNoPending)
   | ({ status: "COMPLETED" } & BankIdNoCompleted)
-  | ({ status: "FAILED" } & BankIdNoFailed);
+  | ({ status: "FAILED" } & BankIdNoFailed)
+  | UnknownStatus;
 
 /** Returned while the user has not yet acted. */
 export interface BankIdNoPending {

@@ -1,4 +1,4 @@
-import type { ApiErrorCode } from "@/models/common";
+import type { ApiErrorCode, UnknownStatus } from "@/models/common";
 
 /** Request body for starting a MitID authentication session. */
 export interface MitIdAuthRequest {
@@ -42,7 +42,8 @@ export interface MitIdSignRequest {
 export type MitIdStatus =
   | ({ status: "PENDING" } & MitIdPending)
   | ({ status: "COMPLETED" } & MitIdCompleted)
-  | ({ status: "FAILED" } & MitIdFailed);
+  | ({ status: "FAILED" } & MitIdFailed)
+  | UnknownStatus;
 
 /** Returned while the user has not yet acted. */
 export interface MitIdPending {

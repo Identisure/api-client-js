@@ -14,19 +14,19 @@ export class VippsEndpoint {
 
   /** Start a Vipps authentication session. */
   public async auth(req: VippsAuthRequest): Promise<VippsStatus> {
-    return this.client._post("/v3/vipps/auth", req);
+    return this.client._postStatus("/v3/vipps/auth", req);
   }
 
   /** Start a Vipps backchannel authentication session. */
   public async backchannelAuth(
     req: VippsBackchannelAuthRequest,
   ): Promise<VippsStatus> {
-    return this.client._post("/v3/vipps/backchannel/auth", req);
+    return this.client._postStatus("/v3/vipps/backchannel/auth", req);
   }
 
   /** Poll the current status of a Vipps authentication session. */
   public async authStatus(id: string): Promise<VippsStatus> {
-    return this.client._get(`/v3/vipps/auth/${id}`);
+    return this.client._getStatus(`/v3/vipps/auth/${id}`);
   }
 
   /** Cancel a Vipps authentication session. */

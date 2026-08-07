@@ -1,4 +1,4 @@
-import type { ApiErrorCode } from "@/models/common";
+import type { ApiErrorCode, UnknownStatus } from "@/models/common";
 
 /**
  * Request body for starting an age verification session.
@@ -23,7 +23,8 @@ export interface AgeVerificationRequest {
 export type AgeVerificationStatus =
   | ({ status: "PENDING" } & AgeVerificationPending)
   | ({ status: "COMPLETED" } & AgeVerificationCompleted)
-  | ({ status: "FAILED" } & AgeVerificationFailed);
+  | ({ status: "FAILED" } & AgeVerificationFailed)
+  | UnknownStatus;
 
 /** Returned while the user has not yet completed age verification. */
 export interface AgeVerificationPending {

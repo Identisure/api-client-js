@@ -1,4 +1,4 @@
-import type { ApiErrorCode, Country } from "@/models/common";
+import type { ApiErrorCode, Country, UnknownStatus } from "@/models/common";
 
 /**
  * Minimum required Freja eID registration level.
@@ -83,7 +83,8 @@ export interface FrejaBackchannelSignRequest {
 export type FrejaStatus =
   | ({ status: "PENDING" } & FrejaPending)
   | ({ status: "COMPLETED" } & FrejaCompleted)
-  | ({ status: "FAILED" } & FrejaFailed);
+  | ({ status: "FAILED" } & FrejaFailed)
+  | UnknownStatus;
 
 /** Returned while the user has not yet acted in the Freja app. */
 export interface FrejaPending {

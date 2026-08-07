@@ -19,29 +19,29 @@ export class MitIdEndpoint {
 
   /** Start a MitID authentication session. */
   public async auth(req: MitIdAuthRequest): Promise<MitIdStatus> {
-    return this.client._post("/v3/mitid/auth", req);
+    return this.client._postStatus("/v3/mitid/auth", req);
   }
 
   /** Start a MitID backchannel authentication session. */
   public async backchannelAuth(
     req: MitIdBackchannelAuthRequest,
   ): Promise<MitIdStatus> {
-    return this.client._post("/v3/mitid/backchannel/auth", req);
+    return this.client._postStatus("/v3/mitid/backchannel/auth", req);
   }
 
   /** Start a MitID signing session. */
   public async sign(req: MitIdSignRequest): Promise<MitIdStatus> {
-    return this.client._post("/v3/mitid/sign", req);
+    return this.client._postStatus("/v3/mitid/sign", req);
   }
 
   /** Poll the current status of a MitID authentication session. */
   public async authStatus(id: string): Promise<MitIdStatus> {
-    return this.client._get(`/v3/mitid/auth/${id}`);
+    return this.client._getStatus(`/v3/mitid/auth/${id}`);
   }
 
   /** Poll the current status of a MitID signing session. */
   public async signStatus(id: string): Promise<MitIdStatus> {
-    return this.client._get(`/v3/mitid/sign/${id}`);
+    return this.client._getStatus(`/v3/mitid/sign/${id}`);
   }
 
   /** Cancel a MitID authentication session. */
@@ -58,14 +58,14 @@ export class MitIdEndpoint {
   public async ageVerification(
     req: AgeVerificationRequest,
   ): Promise<AgeVerificationStatus> {
-    return this.client._post("/v3/mitid/age-verification", req);
+    return this.client._postStatus("/v3/mitid/age-verification", req);
   }
 
   /** Poll the current status of a MitID age verification session. */
   public async ageVerificationStatus(
     id: string,
   ): Promise<AgeVerificationStatus> {
-    return this.client._get(`/v3/mitid/age-verification/${id}`);
+    return this.client._getStatus(`/v3/mitid/age-verification/${id}`);
   }
 
   /** Cancel a MitID age verification session. */

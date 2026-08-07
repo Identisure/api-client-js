@@ -26,6 +26,13 @@ export type ApiErrorCode =
   | "SESSION_TIMEOUT"
   | "UNSUPPORTED_CLIENT";
 
+/** Returned when the server reports a status this client version does not know. */
+export interface UnknownStatus {
+  status: "UNKNOWN";
+  /** Raw `status` value sent by the server. */
+  rawStatus: string;
+}
+
 /** Whether the user or the relying party (RP) initiated the phone call. */
 export type CallInitiator = "USER" | "RP";
 

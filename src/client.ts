@@ -195,6 +195,14 @@ export class IdkollenClient {
     return this.handleResponse<T>(resp);
   }
 
+  async _getStatus<T>(path: string): Promise<T> {
+    return toStatus<T>(await this._get(path));
+  }
+
+  async _postStatus<T>(path: string, body: unknown): Promise<T> {
+    return toStatus<T>(await this._post(path, body));
+  }
+
   async _delete(path: string): Promise<void> {
     let resp: Response;
     try {
@@ -252,4 +260,20 @@ export class IdkollenClient {
 
     return new Uint8Array(buf);
   }
+}
+
+const KNOWN_STATUSES = new Set(["PENDING", "COMPLETED", "FAILED"]);
+
+function toStatus<T>(value: unknown): T {
+  const status = (value as { status?: unknown } | null)?.status;
+
+  if (typeof status !== "string") {
+    throw new IdkollenError("json", 0, "Response is missing a status");
+  }
+
+  if (KNOWN_STATUSES.has(status)) {
+    return value as T;
+  }
+
+  return { status: "UNKNOWN", rawStatus: status } as T;
 }

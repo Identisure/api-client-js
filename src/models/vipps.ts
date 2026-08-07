@@ -1,4 +1,4 @@
-import type { ApiErrorCode } from "@/models/common";
+import type { ApiErrorCode, UnknownStatus } from "@/models/common";
 
 /** Request body for starting a Vipps MobilePay authentication session. */
 export interface VippsAuthRequest {
@@ -38,7 +38,8 @@ export interface VippsBackchannelAuthRequest {
 export type VippsStatus =
   | ({ status: "PENDING" } & VippsPending)
   | ({ status: "COMPLETED" } & VippsCompleted)
-  | ({ status: "FAILED" } & VippsFailed);
+  | ({ status: "FAILED" } & VippsFailed)
+  | UnknownStatus;
 
 /** Returned while the user has not yet acted. */
 export interface VippsPending {

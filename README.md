@@ -40,6 +40,16 @@ const result = await client.bankidSe().waitForAuth(session.id);
 console.log(result);
 ```
 
+### Verifying callbacks
+
+Pass the raw request body exactly as received, before parsing it.
+
+```ts
+import { verifyCallbackSignature } from "@idkollen/client";
+
+const valid = await verifyCallbackSignature(rawBody, req.headers["x-signature-sha256"], hmacSecret);
+```
+
 ## Development
 
 #### Prerequisites

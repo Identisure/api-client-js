@@ -38,14 +38,15 @@
   ],
   "scripts": {
     "build": "vite build",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
     "gen:doc": "typedoc src/index.ts",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "test": "echo \"No tests specified\" && exit 0"
+    "lint": "eslint src test",
+    "lint:fix": "eslint src test --fix",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@types/node": "26.6.5",
     "eslint": "10.4.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.6",
@@ -54,6 +55,7 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.60.1",
     "unplugin-dts-bundle-generator": "3.4.1",
-    "vite": "8.0.16"
+    "vite": "8.0.16",
+    "vitest": "5.0.5"
   }
 }

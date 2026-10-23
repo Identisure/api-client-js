@@ -54,7 +54,7 @@ const valid = await verifyCallbackSignature(rawBody, req.headers["x-signature-sh
 
 #### Prerequisites
 
-* [Node 24+ & NPM 11+](https://nodejs.org/)
+* [Node 22.12+ & npm 10+](https://nodejs.org/)
 
 #### Build
 

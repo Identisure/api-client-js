@@ -1,11 +1,11 @@
-import { IdkollenClient, IdkollenError, PollOptions } from "@/client";
+import { IdentisureClient, IdentisureError, PollOptions } from "@/client";
 import type { VippsAuthRequest, VippsBackchannelAuthRequest, VippsStatus } from "@/models/vipps";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /** Vipps MobilePay operations. */
 export class VippsEndpoint {
-  constructor(private readonly client: IdkollenClient) {}
+  constructor(private readonly client: IdentisureClient) {}
 
   /** Start a Vipps authentication session. */
   public async auth(req: VippsAuthRequest): Promise<VippsStatus> {
@@ -29,7 +29,7 @@ export class VippsEndpoint {
 
   /**
    * Poll until the authentication session reaches a terminal state or the timeout elapses.
-   * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
+   * @throws {IdentisureError} with code `"poll_timeout"` if the timeout is exceeded.
    */
   public async waitForAuth(
     id: string,
@@ -45,7 +45,7 @@ export class VippsEndpoint {
       }
 
       if (performance.now() >= deadline) {
-        throw new IdkollenError("poll_timeout", 0, "Poll timed out");
+        throw new IdentisureError("poll_timeout", 0, "Poll timed out");
       }
 
       await sleep(opts.intervalMs);

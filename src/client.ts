@@ -8,7 +8,7 @@ import { VippsEndpoint } from "@/endpoints/vipps";
 import { DocumentEndpoint } from "@/endpoints/document";
 
 /** Errors returned by all client operations. */
-export class IdkollenError extends Error {
+export class IdentisureError extends Error {
   constructor(
     /** Discriminant for the error kind: `"http"` for network failures, `"api"` for non-2xx responses, `"poll_timeout"` when a `waitFor*` call exceeds its timeout, and `"json"` for unexpected response shapes. */
     public readonly code: "http" | "api" | "poll_timeout" | "json",
@@ -17,7 +17,7 @@ export class IdkollenError extends Error {
     message: string,
   ) {
     super(message);
-    this.name = "IdkollenError";
+    this.name = "IdentisureError";
   }
 }
 
@@ -26,26 +26,26 @@ export class PollOptions {
   constructor(
     /** How long to sleep between status polls, in milliseconds. Default: 2000 ms. */
     public readonly intervalMs: number = 2000,
-    /** Maximum total time to wait before throwing {@link IdkollenError} with code `"poll_timeout"`, in milliseconds. Default: 300 000 ms. */
+    /** Maximum total time to wait before throwing {@link IdentisureError} with code `"poll_timeout"`, in milliseconds. Default: 300 000 ms. */
     public readonly timeoutMs: number = 300_000,
   ) {}
 }
 
-/** Pre-configured API base URL selection. `"production"` targets `https://api.idkollen.se`; `"staging"` targets `https://stgapi.idkollen.se`. */
+/** Pre-configured API base URL selection. `"production"` targets `https://api.identisure.com`; `"staging"` targets `https://stgapi.identisure.com`. */
 export type Environment = "production" | "staging";
 
 const BASE_URLS: Record<Environment, string> = {
-  production: "https://api.idkollen.se",
-  staging: "https://stgapi.idkollen.se",
+  production: "https://api.identisure.com",
+  staging: "https://stgapi.identisure.com",
 };
 
 const REQUEST_TIMEOUT_MS = 30_000;
 
-/** Builder for constructing an {@link IdkollenClient}. */
-export class IdkollenClientBuilder {
+/** Builder for constructing an {@link IdentisureClient}. */
+export class IdentisureClientBuilder {
   private _environment: Environment = "production";
   private _baseUrl?: string;
-  private _userAgent: string = `idkollen-client-js/${version}`;
+  private _userAgent: string = `identisure-client-js/${version}`;
   private _timeoutMs: number = REQUEST_TIMEOUT_MS;
   // ES private field, so console.log and util.inspect do not print the secret.
   readonly #clientSecret: string;
@@ -81,11 +81,11 @@ export class IdkollenClientBuilder {
     return this;
   }
 
-  /** Construct the {@link IdkollenClient} from the accumulated configuration. */
-  build(): IdkollenClient {
+  /** Construct the {@link IdentisureClient} from the accumulated configuration. */
+  build(): IdentisureClient {
     const baseUrl = this._baseUrl ?? BASE_URLS[this._environment];
 
-    return new IdkollenClient(
+    return new IdentisureClient(
       baseUrl,
       this.clientId,
       this.#clientSecret,
@@ -95,8 +95,8 @@ export class IdkollenClientBuilder {
   }
 }
 
-/** Authenticated HTTP client for the Idkollen REST API. Obtain one via {@link IdkollenClientBuilder}. */
-export class IdkollenClient {
+/** Authenticated HTTP client for the Identisure REST API. Obtain one via {@link IdentisureClientBuilder}. */
+export class IdentisureClient {
   // ES private field, so console.log and util.inspect do not print the secret.
   readonly #clientSecret: string;
 
@@ -161,13 +161,13 @@ export class IdkollenClient {
       try {
         return (await resp.json()) as T;
       } catch (err) {
-        throw new IdkollenError("json", 0, (err as Error).message);
+        throw new IdentisureError("json", 0, (err as Error).message);
       }
     }
 
     const text = await resp.text().catch(() => "");
 
-    throw new IdkollenError("api", resp.status, text);
+    throw new IdentisureError("api", resp.status, text);
   }
 
   async _get<T>(path: string): Promise<T> {
@@ -179,7 +179,7 @@ export class IdkollenClient {
         signal: AbortSignal.timeout(this.timeoutMs),
       });
     } catch (err) {
-      throw new IdkollenError("http", 0, (err as Error).message);
+      throw new IdentisureError("http", 0, (err as Error).message);
     }
 
     return this.handleResponse<T>(resp);
@@ -198,7 +198,7 @@ export class IdkollenClient {
         signal: AbortSignal.timeout(this.timeoutMs),
       });
     } catch (err) {
-      throw new IdkollenError("http", 0, (err as Error).message);
+      throw new IdentisureError("http", 0, (err as Error).message);
     }
 
     return this.handleResponse<T>(resp);
@@ -221,13 +221,13 @@ export class IdkollenClient {
         signal: AbortSignal.timeout(this.timeoutMs),
       });
     } catch (err) {
-      throw new IdkollenError("http", 0, (err as Error).message);
+      throw new IdentisureError("http", 0, (err as Error).message);
     }
 
     if (!resp.ok) {
       const text = await resp.text().catch(() => "");
 
-      throw new IdkollenError("api", resp.status, text);
+      throw new IdentisureError("api", resp.status, text);
     }
   }
 
@@ -241,7 +241,7 @@ export class IdkollenClient {
         body: form,
       });
     } catch (err) {
-      throw new IdkollenError("http", 0, (err as Error).message);
+      throw new IdentisureError("http", 0, (err as Error).message);
     }
 
     return this.handleResponse<T>(resp);
@@ -256,13 +256,13 @@ export class IdkollenClient {
         signal: AbortSignal.timeout(this.timeoutMs),
       });
     } catch (err) {
-      throw new IdkollenError("http", 0, (err as Error).message);
+      throw new IdentisureError("http", 0, (err as Error).message);
     }
 
     if (!resp.ok) {
       const text = await resp.text().catch(() => "");
 
-      throw new IdkollenError("api", resp.status, text);
+      throw new IdentisureError("api", resp.status, text);
     }
 
     const buf = await resp.arrayBuffer();
@@ -277,7 +277,7 @@ function toStatus<T>(value: unknown): T {
   const status = (value as { status?: unknown } | null)?.status;
 
   if (typeof status !== "string") {
-    throw new IdkollenError("json", 0, "Response is missing a status");
+    throw new IdentisureError("json", 0, "Response is missing a status");
   }
 
   if (KNOWN_STATUSES.has(status)) {

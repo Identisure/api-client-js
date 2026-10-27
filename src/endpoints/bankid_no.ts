@@ -1,4 +1,4 @@
-import { IdkollenClient, IdkollenError, PollOptions } from "@/client";
+import { IdentisureClient, IdentisureError, PollOptions } from "@/client";
 import type {
   BankIdNoAuthRequest,
   BankIdNoBackchannelAuthRequest,
@@ -11,7 +11,7 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 
 /** BankID NO operations. */
 export class BankIdNoEndpoint {
-  constructor(private readonly client: IdkollenClient) {}
+  constructor(private readonly client: IdentisureClient) {}
 
   /** Start a BankID NO authentication session. */
   public async auth(req: BankIdNoAuthRequest): Promise<BankIdNoStatus> {
@@ -65,7 +65,7 @@ export class BankIdNoEndpoint {
 
   /**
    * Poll until the authentication session reaches a terminal state or the timeout elapses.
-   * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
+   * @throws {IdentisureError} with code `"poll_timeout"` if the timeout is exceeded.
    */
   public async waitForAuth(
     id: string,
@@ -81,7 +81,7 @@ export class BankIdNoEndpoint {
       }
 
       if (performance.now() >= deadline) {
-        throw new IdkollenError("poll_timeout", 0, "Poll timed out");
+        throw new IdentisureError("poll_timeout", 0, "Poll timed out");
       }
 
       await sleep(opts.intervalMs);
@@ -90,7 +90,7 @@ export class BankIdNoEndpoint {
 
   /**
    * Poll until the signing session reaches a terminal state or the timeout elapses.
-   * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
+   * @throws {IdentisureError} with code `"poll_timeout"` if the timeout is exceeded.
    */
   public async waitForSign(
     id: string,
@@ -106,7 +106,7 @@ export class BankIdNoEndpoint {
       }
 
       if (performance.now() >= deadline) {
-        throw new IdkollenError("poll_timeout", 0, "Poll timed out");
+        throw new IdentisureError("poll_timeout", 0, "Poll timed out");
       }
 
       await sleep(opts.intervalMs);
@@ -115,7 +115,7 @@ export class BankIdNoEndpoint {
 
   /**
    * Poll until the age verification session reaches a terminal state or the timeout elapses.
-   * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
+   * @throws {IdentisureError} with code `"poll_timeout"` if the timeout is exceeded.
    */
   public async waitForAgeVerification(
     id: string,
@@ -131,7 +131,7 @@ export class BankIdNoEndpoint {
       }
 
       if (performance.now() >= deadline) {
-        throw new IdkollenError("poll_timeout", 0, "Poll timed out");
+        throw new IdentisureError("poll_timeout", 0, "Poll timed out");
       }
 
       await sleep(opts.intervalMs);

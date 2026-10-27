@@ -2,7 +2,12 @@ import { readFileSync } from "node:fs";
 import { createServer, type IncomingHttpHeaders, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { IdkollenClient, IdkollenClientBuilder, IdkollenError, PollOptions } from "../src/index";
+import {
+  IdentisureClient,
+  IdentisureClientBuilder,
+  IdentisureError,
+  PollOptions,
+} from "../src/index";
 
 interface RecordedRequest {
   method: string;
@@ -35,7 +40,7 @@ function fixture(path: string): unknown {
 let server: Server;
 let queue: QueuedResponse[];
 let requests: RecordedRequest[];
-let client: IdkollenClient;
+let client: IdentisureClient;
 
 function respond(status: number, path: string): void {
   queue.push({ status, body: fixtureText(path) });
@@ -68,7 +73,7 @@ beforeEach(async () => {
   });
   await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
   const { port } = server.address() as AddressInfo;
-  client = new IdkollenClientBuilder("client-id", "client-secret")
+  client = new IdentisureClientBuilder("client-id", "client-secret")
     .baseUrl(`http://127.0.0.1:${port}`)
     .build();
 });
@@ -80,8 +85,8 @@ afterEach(async () => {
 interface AuthProvider {
   dir: string;
   segment: string;
-  start: (c: IdkollenClient) => Promise<Session>;
-  wait: (c: IdkollenClient, id: string) => Promise<Session>;
+  start: (c: IdentisureClient) => Promise<Session>;
+  wait: (c: IdentisureClient, id: string) => Promise<Session>;
 }
 
 const AUTH_PROVIDERS: AuthProvider[] = [
@@ -297,7 +302,7 @@ describe("document", () => {
 });
 
 describe("errors", () => {
-  it("throws IdkollenError on an API error", async () => {
+  it("throws IdentisureError on an API error", async () => {
     respond(400, "error.json");
 
     const err = await client
@@ -305,8 +310,8 @@ describe("errors", () => {
       .auth({})
       .catch((e: unknown) => e);
 
-    expect(err).toBeInstanceOf(IdkollenError);
+    expect(err).toBeInstanceOf(IdentisureError);
     expect(err).toMatchObject({ code: "api", status: 400 });
-    expect((err as IdkollenError).message).toContain("Invalid request");
+    expect((err as IdentisureError).message).toContain("Invalid request");
   });
 });

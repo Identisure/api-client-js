@@ -1,31 +1,31 @@
 {
-  "name": "@idkollen/client",
+  "name": "@identisure/client",
   "version": "0.1.0",
-  "description": "API client for the IDkollen REST API",
+  "description": "API client for the Identisure REST API",
   "type": "module",
-  "main": "./dist/idkollen-client.cjs",
-  "module": "./dist/idkollen-client.js",
-  "types": "./dist/idkollen-client.d.ts",
+  "main": "./dist/identisure-client.cjs",
+  "module": "./dist/identisure-client.js",
+  "types": "./dist/identisure-client.d.ts",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/idkollen-client.d.ts",
-        "default": "./dist/idkollen-client.js"
+        "types": "./dist/identisure-client.d.ts",
+        "default": "./dist/identisure-client.js"
       },
       "require": {
-        "types": "./dist/idkollen-client.d.cts",
-        "default": "./dist/idkollen-client.cjs"
+        "types": "./dist/identisure-client.d.cts",
+        "default": "./dist/identisure-client.cjs"
       }
     }
   },
   "license": "MIT",
-  "homepage": "https://developers.idkollen.se",
+  "homepage": "https://developers.identisure.com",
   "bugs": {
-    "url": "https://github.com/idkollen/idk-clients/issues"
+    "url": "https://github.com/identisure/idk-clients/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idkollen/idk-clients.git"
+    "url": "git+https://github.com/identisure/idk-clients.git"
   },
   "keywords": [
     "bankid",

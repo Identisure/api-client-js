@@ -1,4 +1,4 @@
-export { IdkollenClient, IdkollenClientBuilder, IdkollenError, PollOptions } from "@/client";
+export { IdentisureClient, IdentisureClientBuilder, IdentisureError, PollOptions } from "@/client";
 export type { Environment } from "@/client";
 export { verifyCallbackSignature } from "@/callback";
 

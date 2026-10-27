@@ -8,18 +8,18 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.ts",
-      name: "IdkollenClient",
-      fileName: "idkollen-client",
+      name: "IdentisureClient",
+      fileName: "identisure-client",
       formats: ["es", "cjs"],
     },
   },
   plugins: [
     dtsBundleGenerator({
-      fileName: "idkollen-client.d.ts",
+      fileName: "identisure-client.d.ts",
     }),
     // CJS consumers need .d.cts types, or TypeScript treats them as ESM declarations.
     dtsBundleGenerator({
-      fileName: "idkollen-client.d.cts",
+      fileName: "identisure-client.d.cts",
     }),
   ],
 });

@@ -1,4 +1,4 @@
-import { IdkollenClient, IdkollenError, PollOptions } from "@/client";
+import { IdentisureClient, IdentisureError, PollOptions } from "@/client";
 import type { FtnAuthRequest, FtnStatus } from "@/models/ftn";
 import type { AgeVerificationRequest, AgeVerificationStatus } from "@/models/age_verification";
 
@@ -6,7 +6,7 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 
 /** Finnish Trust Network (FTN) operations. */
 export class FtnEndpoint {
-  constructor(private readonly client: IdkollenClient) {}
+  constructor(private readonly client: IdentisureClient) {}
 
   /** Start a FTN authentication session. */
   public async auth(req: FtnAuthRequest): Promise<FtnStatus> {
@@ -40,7 +40,7 @@ export class FtnEndpoint {
 
   /**
    * Poll until the authentication session reaches a terminal state or the timeout elapses.
-   * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
+   * @throws {IdentisureError} with code `"poll_timeout"` if the timeout is exceeded.
    */
   public async waitForAuth(id: string, opts: PollOptions = new PollOptions()): Promise<FtnStatus> {
     const deadline = performance.now() + opts.timeoutMs;
@@ -53,7 +53,7 @@ export class FtnEndpoint {
       }
 
       if (performance.now() >= deadline) {
-        throw new IdkollenError("poll_timeout", 0, "Poll timed out");
+        throw new IdentisureError("poll_timeout", 0, "Poll timed out");
       }
 
       await sleep(opts.intervalMs);
@@ -62,7 +62,7 @@ export class FtnEndpoint {
 
   /**
    * Poll until the age verification session reaches a terminal state or the timeout elapses.
-   * @throws {IdkollenError} with code `"poll_timeout"` if the timeout is exceeded.
+   * @throws {IdentisureError} with code `"poll_timeout"` if the timeout is exceeded.
    */
   public async waitForAgeVerification(
     id: string,
@@ -78,7 +78,7 @@ export class FtnEndpoint {
       }
 
       if (performance.now() >= deadline) {
-        throw new IdkollenError("poll_timeout", 0, "Poll timed out");
+        throw new IdentisureError("poll_timeout", 0, "Poll timed out");
       }
 
       await sleep(opts.intervalMs);

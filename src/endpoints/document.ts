@@ -1,9 +1,9 @@
-import { IdkollenClient } from "@/client";
+import { IdentisureClient } from "@/client";
 import type { DocumentUploadResponse } from "@/models/document";
 
 /** Document upload and download operations. */
 export class DocumentEndpoint {
-  constructor(private readonly client: IdkollenClient) {}
+  constructor(private readonly client: IdentisureClient) {}
 
   /**
    * Upload a PDF document. Returns the document ID for use in sign requests.

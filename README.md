@@ -1,35 +1,35 @@
 <img align="left" height="100" style="margin-right: 10px;" src="../img/icon.png">
 
-# IDkollen JavaScript/TypeScript Client
+# Identisure JavaScript/TypeScript Client
 
 [![npm][npm-image]][npm-url]
 [![Downloads][downloads-image]][downloads-url]
 [![Documentation][docs-image]][docs-url]
 [![MIT license][license-image]][license-url]
 
-[npm-image]: https://img.shields.io/npm/v/@idkollen/client?style=flat-square 
-[npm-url]: https://www.npmjs.com/package/@idkollen/client
-[downloads-image]: https://img.shields.io/npm/d18m/@idkollen/client?style=flat-square
-[downloads-url]: https://www.npmjs.com/package/@idkollen/client?activeTab=versions
+[npm-image]: https://img.shields.io/npm/v/@identisure/client?style=flat-square 
+[npm-url]: https://www.npmjs.com/package/@identisure/client
+[downloads-image]: https://img.shields.io/npm/d18m/@identisure/client?style=flat-square
+[downloads-url]: https://www.npmjs.com/package/@identisure/client?activeTab=versions
 [docs-image]: https://img.shields.io/badge/github-docs-orange?logo=github&style=flat-square
-[docs-url]: https://idkollen.github.io/idk-clients/js
+[docs-url]: https://identisure.github.io/idk-clients/js
 [license-image]: https://img.shields.io/badge/license-MIT-blue?style=flat-square
 [license-url]: https://opensource.org/license/mit
 
-API client for the [IDkollen](https://developers.idkollen.se) REST API. Ships ESM and CJS bundles with full type declarations.
+API client for the [Identisure](https://developers.identisure.com) REST API. Ships ESM and CJS bundles with full type declarations.
 
 ## Installation
 
 ```sh
-npm install @idkollen/client
+npm install @identisure/client
 ```
 
 ## Usage
 
 ```typescript
-import { IdkollenClientBuilder } from "@idkollen/client";
+import { IdentisureClientBuilder } from "@identisure/client";
 
-const client = new IdkollenClientBuilder("client_id", "client_secret")
+const client = new IdentisureClientBuilder("client_id", "client_secret")
   .environment("staging")
   .build();
 
@@ -45,7 +45,7 @@ console.log(result);
 Pass the raw request body exactly as received, before parsing it.
 
 ```ts
-import { verifyCallbackSignature } from "@idkollen/client";
+import { verifyCallbackSignature } from "@identisure/client";
 
 const valid = await verifyCallbackSignature(rawBody, req.headers["x-signature-sha256"], hmacSecret);
 ```

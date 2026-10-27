@@ -31,12 +31,12 @@ export class PollOptions {
   ) {}
 }
 
-/** Pre-configured API base URL selection. `"production"` targets `https://api.identisure.com`; `"staging"` targets `https://stgapi.identisure.com`. */
+/** Pre-configured API base URL selection. `"production"` targets `https://api.idkollen.se`; `"staging"` targets `https://stgapi.idkollen.se`. */
 export type Environment = "production" | "staging";
 
 const BASE_URLS: Record<Environment, string> = {
-  production: "https://api.identisure.com",
-  staging: "https://stgapi.identisure.com",
+  production: "https://api.idkollen.se",
+  staging: "https://stgapi.idkollen.se",
 };
 
 const REQUEST_TIMEOUT_MS = 30_000;

@@ -36,6 +36,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "vite build",
     "check": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",

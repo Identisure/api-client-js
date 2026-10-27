@@ -2,12 +2,7 @@ import { readFileSync } from "node:fs";
 import { createServer, type IncomingHttpHeaders, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import {
-  IdkollenClient,
-  IdkollenClientBuilder,
-  IdkollenError,
-  PollOptions,
-} from "../src/index";
+import { IdkollenClient, IdkollenClientBuilder, IdkollenError, PollOptions } from "../src/index";
 
 interface RecordedRequest {
   method: string;
@@ -30,10 +25,7 @@ const FAST = new PollOptions(1, 5_000);
 const BASIC_AUTH = `Basic ${btoa("client-id:client-secret")}`;
 
 function fixtureText(path: string): string {
-  return readFileSync(
-    new URL(`../../fixtures/${path}`, import.meta.url),
-    "utf8",
-  );
+  return readFileSync(new URL(`../../fixtures/${path}`, import.meta.url), "utf8");
 }
 
 function fixture(path: string): unknown {
@@ -71,9 +63,7 @@ beforeEach(async () => {
         res.writeHead(500).end();
         return;
       }
-      res
-        .writeHead(next.status, { "Content-Type": "application/json" })
-        .end(next.body);
+      res.writeHead(next.status, { "Content-Type": "application/json" }).end(next.body);
     });
   });
   await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
@@ -160,10 +150,7 @@ const SIGN_PROVIDERS: AuthProvider[] = [
   },
 ];
 
-async function startAndWait(
-  p: AuthProvider,
-  pendingFixture: string,
-): Promise<Session> {
+async function startAndWait(p: AuthProvider, pendingFixture: string): Promise<Session> {
   const started = await p.start(client);
   expect(started).toEqual(fixture(pendingFixture));
 
@@ -273,10 +260,7 @@ describe("age verification", () => {
     expect(started).toEqual(fixture("age_verification/pending.json"));
     const result = await client
       .bankidSe()
-      .waitForAgeVerification(
-        started.status === "PENDING" ? started.id : "",
-        FAST,
-      );
+      .waitForAgeVerification(started.status === "PENDING" ? started.id : "", FAST);
 
     expect(result).toEqual(fixture(`age_verification/${outcome}.json`));
     expect(requestLines()).toEqual([
@@ -293,10 +277,7 @@ describe("age verification", () => {
     const started = await client.bankidSe().ageVerification({ minAge: 18 });
     const result = await client
       .bankidSe()
-      .waitForAgeVerification(
-        started.status === "PENDING" ? started.id : "",
-        FAST,
-      );
+      .waitForAgeVerification(started.status === "PENDING" ? started.id : "", FAST);
 
     expect(result).toEqual({ status: "UNKNOWN", rawStatus: "SOMETHING_NEW" });
   });
@@ -306,15 +287,11 @@ describe("document", () => {
   it("uploads a file", async () => {
     respond(201, "document/upload.json");
 
-    const result = await client
-      .document()
-      .upload(new Uint8Array([37, 80, 68, 70]), "contract.pdf");
+    const result = await client.document().upload(new Uint8Array([37, 80, 68, 70]), "contract.pdf");
 
     expect(result).toEqual(fixture("document/upload.json"));
     expect(requestLines()).toEqual(["POST /v3/document"]);
-    expect(requests[0].headers["content-type"]).toMatch(
-      /^multipart\/form-data/,
-    );
+    expect(requests[0].headers["content-type"]).toMatch(/^multipart\/form-data/);
     expect(requests[0].body).toContain('filename="contract.pdf"');
   });
 });

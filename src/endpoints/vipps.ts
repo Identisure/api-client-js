@@ -1,12 +1,7 @@
 import { IdkollenClient, IdkollenError, PollOptions } from "@/client";
-import type {
-  VippsAuthRequest,
-  VippsBackchannelAuthRequest,
-  VippsStatus,
-} from "@/models/vipps";
+import type { VippsAuthRequest, VippsBackchannelAuthRequest, VippsStatus } from "@/models/vipps";
 
-const sleep = (ms: number): Promise<void> =>
-  new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /** Vipps MobilePay operations. */
 export class VippsEndpoint {
@@ -18,9 +13,7 @@ export class VippsEndpoint {
   }
 
   /** Start a Vipps backchannel authentication session. */
-  public async backchannelAuth(
-    req: VippsBackchannelAuthRequest,
-  ): Promise<VippsStatus> {
+  public async backchannelAuth(req: VippsBackchannelAuthRequest): Promise<VippsStatus> {
     return this.client._postStatus("/v3/vipps/backchannel/auth", req);
   }
 

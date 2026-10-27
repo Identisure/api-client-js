@@ -24,8 +24,7 @@ export async function verifyCallbackSignature(
     false,
     ["verify"],
   );
-  const data =
-    typeof body === "string" ? encoder.encode(body) : Uint8Array.from(body);
+  const data = typeof body === "string" ? encoder.encode(body) : Uint8Array.from(body);
 
   return crypto.subtle.verify("HMAC", key, expected, data);
 }

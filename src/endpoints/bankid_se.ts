@@ -8,13 +8,9 @@ import type {
   BankIdSeVerifyRequest,
   BankIdSeVerifyResponse,
 } from "@/models/bankid_se";
-import type {
-  AgeVerificationRequest,
-  AgeVerificationStatus,
-} from "@/models/age_verification";
+import type { AgeVerificationRequest, AgeVerificationStatus } from "@/models/age_verification";
 
-const sleep = (ms: number): Promise<void> =>
-  new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /** BankID SE operations. */
 export class BankIdSeEndpoint {
@@ -26,9 +22,7 @@ export class BankIdSeEndpoint {
   }
 
   /** Start a BankID SE phone authentication session. */
-  public async phoneAuth(
-    req: BankIdSePhoneAuthRequest,
-  ): Promise<BankIdSeStatus> {
+  public async phoneAuth(req: BankIdSePhoneAuthRequest): Promise<BankIdSeStatus> {
     return this.client._postStatus("/v3/bankid-se/phone/auth", req);
   }
 
@@ -38,23 +32,17 @@ export class BankIdSeEndpoint {
   }
 
   /** Start a BankID SE phone signing session. */
-  public async phoneSign(
-    req: BankIdSePhoneSignRequest,
-  ): Promise<BankIdSeStatus> {
+  public async phoneSign(req: BankIdSePhoneSignRequest): Promise<BankIdSeStatus> {
     return this.client._postStatus("/v3/bankid-se/phone/sign", req);
   }
 
   /** Verify a scanned BankID SE QR code. */
-  public async verify(
-    req: BankIdSeVerifyRequest,
-  ): Promise<BankIdSeVerifyResponse> {
+  public async verify(req: BankIdSeVerifyRequest): Promise<BankIdSeVerifyResponse> {
     return this.client._post("/v3/bankid-se/verify", req);
   }
 
   /** Start a BankID SE age verification session. */
-  public async ageVerification(
-    req: AgeVerificationRequest,
-  ): Promise<AgeVerificationStatus> {
+  public async ageVerification(req: AgeVerificationRequest): Promise<AgeVerificationStatus> {
     return this.client._postStatus("/v3/bankid-se/age-verification", req);
   }
 
@@ -69,9 +57,7 @@ export class BankIdSeEndpoint {
   }
 
   /** Poll the current status of a BankID SE age verification session. */
-  public async ageVerificationStatus(
-    id: string,
-  ): Promise<AgeVerificationStatus> {
+  public async ageVerificationStatus(id: string): Promise<AgeVerificationStatus> {
     return this.client._getStatus(`/v3/bankid-se/age-verification/${id}`);
   }
 

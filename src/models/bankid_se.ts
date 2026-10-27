@@ -1,8 +1,4 @@
-import type {
-  ApiErrorCode,
-  CallInitiator,
-  UnknownStatus,
-} from "@/models/common";
+import type { ApiErrorCode, CallInitiator, UnknownStatus } from "@/models/common";
 
 /** Request body for starting a BankID SE authentication session. */
 export interface BankIdSeAuthRequest {

@@ -21,11 +21,11 @@
   "license": "MIT",
   "homepage": "https://developers.identisure.com",
   "bugs": {
-    "url": "https://github.com/identisure/idk-clients/issues"
+    "url": "https://github.com/identisure/api-client-js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/identisure/idk-clients.git"
+    "url": "git+https://github.com/identisure/api-client-js.git"
   },
   "keywords": [
     "bankid",

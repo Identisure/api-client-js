@@ -30,7 +30,7 @@ const FAST = new PollOptions(1, 5_000);
 const BASIC_AUTH = `Basic ${btoa("client-id:client-secret")}`;
 
 function fixtureText(path: string): string {
-  return readFileSync(new URL(`../../fixtures/${path}`, import.meta.url), "utf8");
+  return readFileSync(new URL(`../fixtures/${path}`, import.meta.url), "utf8");
 }
 
 function fixture(path: string): unknown {

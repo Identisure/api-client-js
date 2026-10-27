@@ -1,4 +1,4 @@
-<img align="left" height="100" style="margin-right: 10px;" src="../img/icon.png">
+<img align="left" height="100" style="margin-right: 10px;" src="img/icon.png">
 
 # Identisure JavaScript/TypeScript Client
 
@@ -12,7 +12,7 @@
 [downloads-image]: https://img.shields.io/npm/d18m/@identisure/client?style=flat-square
 [downloads-url]: https://www.npmjs.com/package/@identisure/client?activeTab=versions
 [docs-image]: https://img.shields.io/badge/github-docs-orange?logo=github&style=flat-square
-[docs-url]: https://identisure.github.io/idk-clients/js
+[docs-url]: https://identisure.github.io/api-client-js
 [license-image]: https://img.shields.io/badge/license-MIT-blue?style=flat-square
 [license-url]: https://opensource.org/license/mit
 
@@ -55,6 +55,16 @@ const valid = await verifyCallbackSignature(rawBody, req.headers["x-signature-sh
 #### Prerequisites
 
 * [Node 22.12+ & npm 10+](https://nodejs.org/)
+
+#### Clone
+
+The test fixtures live in a git submodule:
+
+```sh
+$ git clone --recurse-submodules https://github.com/identisure/api-client-js.git
+```
+
+In an existing clone, run `git submodule update --init`.
 
 #### Build
 

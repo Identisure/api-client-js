@@ -1,5 +1,5 @@
 {
-  "out": "../docs/js",
+  "out": "docs",
   "headings": {
     "readme": false
   }

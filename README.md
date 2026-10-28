@@ -18,6 +18,8 @@
 
 API client for the [Identisure](https://developers.identisure.com) REST API. Ships ESM and CJS bundles with full type declarations.
 
+Documentation: [identisure.github.io/api-client-js](https://identisure.github.io/api-client-js)
+
 ## Requirements
 
 Node 20 or later.
